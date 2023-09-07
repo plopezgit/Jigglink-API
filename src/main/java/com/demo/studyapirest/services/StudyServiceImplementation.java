@@ -5,12 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.demo.studyapirest.models.Concept;
-import com.demo.studyapirest.models.Itinerary;
-import com.demo.studyapirest.models.User;
-import com.demo.studyapirest.repository.StudyConceptRepository;
-import com.demo.studyapirest.repository.StudyItineraryRepository;
-import com.demo.studyapirest.repository.StudyUserRepository;
+import com.demo.studyapirest.models.*;
+import com.demo.studyapirest.repository.*;
 
 @Service
 public class StudyServiceImplementation implements InterfaceStudyService {
@@ -21,6 +17,11 @@ public class StudyServiceImplementation implements InterfaceStudyService {
 	StudyItineraryRepository itineraryRepository;
 	@Autowired
 	StudyConceptRepository conceptRepository;
+	@Autowired
+	StudyIdeaRepository ideaRepository;
+	@Autowired
+	StudyBadgeRepository badgeRepository;
+
 	
 	@Override
 	public List<User> getUsers() {
@@ -60,7 +61,6 @@ public class StudyServiceImplementation implements InterfaceStudyService {
 	@Override
 	public void deleteItinerary(int itineraryID) {
 		itineraryRepository.deleteById(itineraryID);
-		
 	}
 
 	@Override
@@ -81,7 +81,46 @@ public class StudyServiceImplementation implements InterfaceStudyService {
 	@Override
 	public void deleteConcept(int idconcept) {
 		conceptRepository.deleteById(idconcept);
-		
+	}
+
+	@Override
+	public List<Badge> getBadges() {
+		return badgeRepository.findAll();
+	}
+
+	@Override
+	public Badge saveBadge(Badge badge) {
+		return badgeRepository.save(badge);
+	}
+
+	@Override
+	public Badge getBadge(String badgeName) {
+		return badgeRepository.findById(badgeName).orElse(null);
+	}
+
+	@Override
+	public void deleteBadge(String badgeName) {
+		badgeRepository.deleteById(badgeName);
+	}
+
+	@Override
+	public List<Idea> getIdeas() {
+		return ideaRepository.findAll();
+	}
+
+	@Override
+	public Idea saveIdea(Idea idea) {
+		return ideaRepository.save(idea);
+	}
+
+	@Override
+	public Idea getIdea(int ideaID) {
+		return ideaRepository.findById(ideaID).orElse(null);
+	}
+
+	@Override
+	public void deleteIdea(int ideaID) {
+		ideaRepository.deleteById(ideaID);
 	}
 
 }

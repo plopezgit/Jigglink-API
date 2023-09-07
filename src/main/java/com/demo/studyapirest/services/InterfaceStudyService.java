@@ -2,9 +2,7 @@ package com.demo.studyapirest.services;
 
 import java.util.List;
 
-import com.demo.studyapirest.models.Concept;
-import com.demo.studyapirest.models.Itinerary;
-import com.demo.studyapirest.models.User;
+import com.demo.studyapirest.models.*;
 
 public interface InterfaceStudyService {
 	
@@ -22,5 +20,15 @@ public interface InterfaceStudyService {
 	public Concept saveConcept (Concept concept);
 	public Concept getConcept (int idconcept);
 	public void deleteConcept (int idconcept);
+	
+	public List<Badge> getBadges ();
+	public Badge saveBadge (Badge badge);
+	public Badge getBadge (String badgeName);
+	public void deleteBadge (String badgeName);
+	
+	public List<Idea> getIdeas ();
+	public Idea saveIdea (Idea idea);
+	public Idea getIdea (int ideaID);
+	public void deleteIdea (int ideaID);
 	
 }

@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.demo.studyapirest.models.Badge;
 import com.demo.studyapirest.models.Concept;
+import com.demo.studyapirest.models.Idea;
 import com.demo.studyapirest.models.Itinerary;
 import com.demo.studyapirest.models.User;
 import com.demo.studyapirest.services.StudyServiceImplementation;
@@ -159,5 +161,90 @@ public class StudyController {
 		return ResponseEntity.ok(conceptDeletedState);
 	}
 	
+	@GetMapping("/ideas")
+	public List<Idea> getIdeas () {
+		
+		return studyServiceImplementation.getIdeas();
+	}
+	
+	@PostMapping("/saveIdeas")
+	public ResponseEntity<Idea> saveIdeas (@RequestBody Idea idea) {
+		Idea newIdeas = studyServiceImplementation.saveIdea(idea);
+		
+		return new ResponseEntity<>(newIdeas, HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/idea/{ideaID}")
+	public ResponseEntity<Idea> getIdea (@PathVariable int ideaID) {
+		Idea thisIdea =  studyServiceImplementation.getIdea(ideaID);
+		
+		return ResponseEntity.ok(thisIdea);
+	}
+	
+	@PutMapping("/idea/{ideaID}")
+	public ResponseEntity<Idea> updateIdea (@PathVariable int ideaID, @RequestBody Idea idea) {
+		Idea thisIdea = studyServiceImplementation.getIdea(ideaID);
+		thisIdea.setTitleIdea(idea.getTitleIdea());
+		thisIdea.setDescriptionIdea(idea.getDescriptionIdea());
+		thisIdea.setConcept(idea.getConcept());
+		
+		Idea updatedIdea = studyServiceImplementation.saveIdea(thisIdea);
+		
+		return new ResponseEntity<>(updatedIdea, HttpStatus.CREATED);
+	}
+	
+	@DeleteMapping("/idea/{ideaID}")
+	public ResponseEntity<HashMap<String, Boolean>> deleteIdea (@PathVariable int ideaID) {
+		
+		this.studyServiceImplementation.deleteIdea(ideaID);
+		
+		HashMap<String, Boolean> ideaDeletedState =  new HashMap<String, Boolean>();
+		ideaDeletedState.put("Deleted", true);
+		return ResponseEntity.ok(ideaDeletedState);
+	}
+	
+	
+	
+	@GetMapping("/badges")
+	public List<Badge> getBadges () {
+		
+		return studyServiceImplementation.getBadges();
+	}
+	
+	@PostMapping("/saveBadge")
+	public ResponseEntity<Badge> saveBadge (@RequestBody Badge badge) {
+		Badge newBadge = studyServiceImplementation.saveBadge(badge);
+		
+		return new ResponseEntity<>(newBadge, HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/badge/{badgeName}")
+	public ResponseEntity<Badge> getBadge (@PathVariable String badgeName) {
+		Badge thisBadge =  studyServiceImplementation.getBadge(badgeName);
+		
+		return ResponseEntity.ok(thisBadge);
+	}
+	
+	@PutMapping("/badge/{badgeName}")
+	public ResponseEntity<Badge> updateBadge (@PathVariable String badgeName, @RequestBody Badge badge) {
+		Badge thisBadge = studyServiceImplementation.getBadge(badgeName);
+		thisBadge.setBadgeName(badge.getBadgeName());
+		thisBadge.setCoachMessage(badge.getCoachMessage());
+		thisBadge.setIcon(badge.getIcon());
+		
+		Badge updatedBadge = studyServiceImplementation.saveBadge(thisBadge);
+		
+		return new ResponseEntity<>(updatedBadge, HttpStatus.CREATED);
+	}
+	
+	@DeleteMapping("/badge/{badgeName}")
+	public ResponseEntity<HashMap<String, Boolean>> deleteBadge (@PathVariable String badgeName) {
+		
+		this.studyServiceImplementation.deleteBadge(badgeName);
+		
+		HashMap<String, Boolean> badgeDeletedState =  new HashMap<String, Boolean>();
+		badgeDeletedState.put("Deleted", true);
+		return ResponseEntity.ok(badgeDeletedState);
+	}
 	
 }
