@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="ITINERARY")
@@ -30,6 +32,7 @@ public class Itinerary {
 	private LocalDate targetDate;
 	@Column(name="ITINERARYPOINTS")
 	private int itinerarypoints;
+	@JsonIgnore
 	@OneToMany(mappedBy= "itinerary", cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	private List<Concept> conceptList;
 	
@@ -43,11 +46,12 @@ public class Itinerary {
 		
 	}
 
-	public Itinerary(String itineraryname, LocalDate targetDate, int itinerarypoints) {
+	public Itinerary(String itineraryname, LocalDate targetDate, int itinerarypoints, User user) {
 
 		this.itineraryname = itineraryname;
 		this.targetDate = targetDate;
 		this.itinerarypoints = itinerarypoints;
+		this.user = user;
 	}
 	
 	public void addConcept (Concept concept) {
@@ -110,7 +114,7 @@ public class Itinerary {
 	@Override
 	public String toString() {
 		return "Itinerary [itineraryID=" + itineraryID + ", itineraryname=" + itineraryname + ", targetDate="
-				+ targetDate + ", itinerarypoints=" + itinerarypoints + "]";
-	}	
-
+				+ targetDate + ", itinerarypoints=" + itinerarypoints + ", conceptList=" + conceptList + ", user="
+				+ user + "]";
+	}
 }

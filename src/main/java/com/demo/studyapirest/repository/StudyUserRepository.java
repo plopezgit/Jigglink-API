@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.demo.studyapirest.models.User;
 
 @Repository
-public interface StudyRepository extends JpaRepository<User, String> {
+public interface StudyUserRepository extends JpaRepository<User, String> {
 
 }
+
+

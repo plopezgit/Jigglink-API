@@ -40,10 +40,11 @@ public class Concept {
 		
 	}
 	
-	public Concept(String titleConcept, String effortEstimationConcept) {
+	public Concept(String titleConcept, String effortEstimationConcept, Itinerary itinerary) {
 		this.titleConcept = titleConcept;
 		this.effortEstimationConcept = effortEstimationConcept;
 		this.notesconcept = "";
+		this.itinerary = itinerary;
 	}
 	
 	public void addIdea (Idea idea) {
