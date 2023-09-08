@@ -21,7 +21,7 @@ public class User {
 	boolean enabled;
 	
 	@OneToMany(mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH, CascadeType.REMOVE }, fetch = FetchType.LAZY)
+			CascadeType.REFRESH, CascadeType.REMOVE })
 	private List<Itinerary> itineraryList;
 
 	public User() {
