@@ -26,10 +26,12 @@ public class Concept {
 	private String whyConcept;
 	@Column(name="CHECKINCOUNTERCONCEPT")
 	private int checkInCounterConcept;
-	@OneToMany(mappedBy= "concept", cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
+	@OneToMany(mappedBy= "concept", cascade= {CascadeType.PERSIST, CascadeType.MERGE, 
+			CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE}, fetch = FetchType.LAZY)
 	private List<Idea> ideaList;
 	
-	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, 
+			CascadeType.REFRESH})
 	@JoinColumn(name="ITINERARYID")
 	private Itinerary itinerary;
 	

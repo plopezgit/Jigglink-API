@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,7 +21,7 @@ public class User {
 	boolean enabled;
 	
 	@OneToMany(mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH, CascadeType.REMOVE })
+			CascadeType.REFRESH, CascadeType.REMOVE }, fetch = FetchType.LAZY)
 	private List<Itinerary> itineraryList;
 
 	public User() {
