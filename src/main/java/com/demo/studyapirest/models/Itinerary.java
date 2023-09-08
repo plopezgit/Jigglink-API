@@ -35,7 +35,7 @@ public class Itinerary {
 	private int itinerarypoints;
 	@JsonIgnore
 	@OneToMany(mappedBy= "itinerary", cascade= {CascadeType.PERSIST, CascadeType.MERGE, 
-			CascadeType.DETACH, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+			CascadeType.DETACH, CascadeType.REFRESH})
 	private List<Concept> conceptList;
 	
 	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, 

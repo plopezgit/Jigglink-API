@@ -27,7 +27,7 @@ public class Concept {
 	@Column(name="CHECKINCOUNTERCONCEPT")
 	private int checkInCounterConcept;
 	@OneToMany(mappedBy= "concept", cascade= {CascadeType.PERSIST, CascadeType.MERGE, 
-			CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE}, fetch = FetchType.LAZY)
+			CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
 	private List<Idea> ideaList;
 	
 	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, 

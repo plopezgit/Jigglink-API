@@ -16,7 +16,7 @@ public class Idea {
 	private String descriptionIdea;
 	
 	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, 
-			CascadeType.REFRESH}, fetch = FetchType.LAZY)
+			CascadeType.REFRESH})
 	@JoinColumn(name="IDCONCEPT")
 	private Concept concept;
 	
